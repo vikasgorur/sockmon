@@ -1,0 +1,58 @@
+==========
+sockmon
+==========
+
+This package contains a pair of programs that attempt to keep a TCP
+connection alive indefinitely.
+
+Dependencies
+------------
+
+This package needs the pthreads library to build.
+
+Building
+--------
+
+$ make
+
+This will generate the sockmon binary. The same binary can act as both
+server and client.
+
+Invocation
+----------
+
+Start the server with the desired port number. The process will not
+automatically daemonize. It will also log to stdout, so you might want
+to redirect it to a file.
+
+$ ./sockmon -s -p 24000 > /home/vikas/sockmond.log &
+
+Start any number of clients on any number of hosts with the server's
+IP address (NOT the hostname) and the port number. Again, the client
+does not daemonize and logs to stdout.
+
+$ ./sockmon -c 10.1.30.21 -p 24000 > /home/vikas/sockmon.log &
+
+Options
+-------
+
+  -c, --client=SERVER-IP     Run as client (connect to SERVER-IP)
+  -p, --port=PORT            Port number to use [Mandatory]
+  -s, --server               Run as server
+  -t, --time=SECONDS         Time interval in seconds (default: 300) for pings
+                             (client only)
+  -?, --help                 Give this help list
+      --usage                Give a short usage message
+  -V, --version              Print program version
+
+The time interval (-t) option controls how often the client pings the
+server. The default is 5 minutes.
+
+Contact
+-------
+
+Vikas Gorur <vikas@gluster.com>
+
+------------------------------------------
+Last updated: Fri Oct 29 10:53:16 PDT 2010
+------------------------------------------
